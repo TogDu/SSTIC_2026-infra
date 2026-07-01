@@ -4,6 +4,7 @@ Partial backup from SSTIC 2026 challenge server. Should contains all players vis
 
 ## Infra overview : 
 
+```
             +-----------+
             |           |  /* --------> filer folder + autoindex
 HTTP/80 <-->|  NGINX:   | 
@@ -47,7 +48,7 @@ rand[30000:32767] <---> | <---> | proxy for vnc |<------+                       
                         |       +---------------+                                               |
                         |                                                                       |
                         +-----------------------------------------------------------------------+
-
+```
 
 ## Repository content:
 
