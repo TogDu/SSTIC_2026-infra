@@ -1,0 +1,75 @@
+FROM debian:trixie
+USER root
+COPY --chmod=700 packages.sh /root/packages.sh
+RUN /root/packages.sh
+COPY --chmod=700 setup.sh /root/setup.sh
+RUN /root/setup.sh
+
+#######################################################################################################################################
+#
+# step 3
+#
+
+USER diode
+WORKDIR /home/diode
+RUN mkdir /home/diode/log /home/diode/diode_dest /home/diode/hls
+RUN touch /home/diode/log/diode_dest.log /home/diode/weapon_auth.log /home/diode/weapon_system.log
+COPY --chown=diode terminator/config /home/diode/terminator.cfg
+COPY --chown=diode --chmod=755 vnc.sh /home/diode/vnc.sh
+# COPY --chown=diode --chmod=755 hls.sh /home/diode/hls.sh
+
+COPY diode_dest/*.py /home/diode/diode_dest
+# RUN mkdir /home/diode/crypto
+COPY --chown=diode --chmod=755 crypto/lobster256 /home/diode/crypto/
+
+###PROD_KEY : 02_SIVI_KEY/lobster_public_key 
+###     also used for PUBLIC VERSION
+COPY --chown=diode --chmod=700 crypto/lobster_public_key.bin /home/diode/crypto/public_key.bin
+
+#######################################################################################################################################
+#
+# step 5
+#
+
+USER root
+COPY Weapon_server/* /home/weapon_server/chal/Weapon_server/
+COPY Weapon_common/* /home/weapon_server/chal/Weapon_common/
+COPY pyproject.toml  /home/weapon_server/chal/pyproject.toml
+
+COPY --chmod=700 weapon_authent /home/weapon_authent/chal/
+COPY --chmod=700 weapon_supervisor /home/weapon_authent/chal/
+
+RUN chown -R weapon_server:weapon_server /home/weapon_server/chal/
+RUN chown -R weapon_authent:weapon_authent /home/weapon_authent/chal/
+
+USER weapon_server
+WORKDIR /home/weapon_server/chal
+RUN python3 -m venv venv; \
+    . venv/bin/activate; \
+    pip install -e .  --trusted-host=pypi.org; \
+    pip install --trusted-host=pypi.org textual
+COPY --chmod=700 --chown=weapon_server:weapon_server start_server.sh /home/weapon_server/chal/start_server.sh
+COPY --chmod=700 --chown=weapon_authent:weapon_authent start_auth.sh /home/weapon_authent/chal/start_auth.sh
+
+USER root
+
+#######################################################################################################################################
+# PUBLIC FLAGS (supplied to challengers)
+#####
+#DO NOT INCLUDE FOR CHALLENGER'S RELEASE
+#COPY --chmod=700 --chown=diode data/prod/lobster_ignition.bin /home/diode/crypto/
+#####
+#COPY --chmod=700 --chown=diode data/challengers/flag_step3.txt /home/diode/crypto/flag.txt
+#COPY --chmod=700 --chown=weapon_authent:weapon_authent data/challengers/users_db.bin /home/weapon_authent/chal/
+#COPY --chmod=700 --chown=weapon_server:weapon_server data/challengers/state.json /home/weapon_server/chal/Weapon_server/state.json
+
+# PRODUCTION FLAGS 
+COPY --chmod=700 --chown=diode data/prod/lobster_ignition.bin /home/diode/crypto/
+COPY --chmod=700 --chown=diode data/prod/flag_step3.txt /home/diode/crypto/flag.txt
+COPY --chmod=700 --chown=weapon_authent:weapon_authent data/prod/users_db.bin /home/weapon_authent/chal/
+COPY --chmod=700 --chown=weapon_server:weapon_server data/prod/state.json /home/weapon_server/chal/Weapon_server/state.json
+#######################################################################################################################################
+
+# finally
+COPY services.conf /etc/supervisor/conf.d/services.conf
+CMD ["/usr/bin/supervisord",  "-c",  "/etc/supervisor/conf.d/services.conf"]

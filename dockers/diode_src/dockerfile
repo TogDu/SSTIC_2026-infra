@@ -1,0 +1,26 @@
+FROM debian:trixie
+USER root
+
+COPY sftp /root/sftp
+
+COPY --chmod=700 setup.sh /root/setup.sh
+RUN /root/setup.sh
+
+WORKDIR /home/diode
+
+COPY --chown=diode:diode --chmod=700 diode_src /home/diode/diode_src
+
+#######################################################################################################################################
+#PROD ONLY
+COPY --chown=diode:diode --chmod=600 data/prod/flag.txt /sftp/data/flag.txt
+COPY --chown=diode:diode --chmod=600 data/prod/archive/* /sftp/data/archive/
+COPY --chown=diode:diode --chmod=640 data/prod/log/* /sftp/data/log/
+
+#PUBLIC VERSION
+#COPY --chown=diode:diode --chmod=600 data/challengers/flag.txt /sftp/data/flag.txt
+#COPY --chown=diode:diode --chmod=600 data/challengers/archive/* /sftp/data/archive/
+#######################################################################################################################################
+
+# finally
+COPY services.conf /etc/supervisor/conf.d/services.conf
+CMD ["/usr/bin/supervisord",  "-c",  "/etc/supervisor/conf.d/services.conf"]

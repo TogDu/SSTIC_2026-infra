@@ -1,0 +1,6 @@
+[project]
+name = "weapon"
+version = "0.0.1"
+
+[tool.setuptools]
+packages = ["Weapon_common","Weapon_server"]

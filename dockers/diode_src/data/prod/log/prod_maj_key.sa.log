@@ -1,0 +1,11 @@
+[2026-03-24 12:17:47] [INFO] Processings data/in/prod_maj_key.sa
+[2026-03-24 12:17:47] [INFO] Archive mapped at 0x7f4cf8688000, size is 314
+[2026-03-24 12:17:47] [INFO] CRC is valid
+[2026-03-24 12:17:47] [INFO] Header is valid
+[2026-03-24 12:17:47] [INFO] Add tag: 'RELEASE'
+[2026-03-24 12:17:47] [INFO] Add tag: 'SETUP_KEY'
+[2026-03-24 12:17:47] [INFO] Add tag: 'ARCHIVE'
+[2026-03-24 12:17:47] [INFO] Add tag: 'SSTIC2026'
+[2026-03-24 12:17:47] [INFO] Tags are valid
+[2026-03-24 12:17:47] [INFO] Pkg is valid
+[2026-03-24 12:17:47] [INFO] Secret is valid

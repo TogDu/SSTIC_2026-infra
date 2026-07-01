@@ -1,0 +1,9 @@
+A,
+
+...
+
+L'implant qui tournait sur ta machine a été désactivé. Heureusement que tu n'avais pas grand chose dans ton home de compromettant pour l'opération. 
+
+Je laisse le fichier exfiltré en référence.
+
+F.

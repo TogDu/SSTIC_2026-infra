@@ -1,0 +1,8 @@
+Salut ! 
+
+Est-ce que tu pourrais préparer une archive de mise à jour de la base de données ? Il faudrait supprimer les comptes SSTIC_USER, 
+audit_KaKaHuet et celui de Stephen LEE, qui a quitté Aegis en fin de semaine dernière.
+
+Merci !
+
+Jean

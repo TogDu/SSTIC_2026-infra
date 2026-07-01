@@ -1,0 +1,11 @@
+[2026-03-24 12:18:05] [INFO] Processings data/in/prod_maj_bin.sa
+[2026-03-24 12:18:05] [INFO] Archive mapped at 0x7f4cf8452000, size is 98683
+[2026-03-24 12:18:05] [INFO] CRC is valid
+[2026-03-24 12:18:05] [INFO] Header is valid
+[2026-03-24 12:18:05] [INFO] Add tag: 'RELEASE'
+[2026-03-24 12:18:05] [INFO] Add tag: 'SETUP_LOBSTER256'
+[2026-03-24 12:18:05] [INFO] Add tag: 'ARCHIVE'
+[2026-03-24 12:18:05] [INFO] Add tag: 'SSTIC2026'
+[2026-03-24 12:18:05] [INFO] Tags are valid
+[2026-03-24 12:18:05] [INFO] Pkg is valid
+[2026-03-24 12:18:05] [INFO] Secret is valid

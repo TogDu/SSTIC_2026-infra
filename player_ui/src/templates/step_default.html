@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSTIC Challenge - PREPROD</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main>
+        <h1>SSTIC Challenge - PREPROD</h1>
+
+        <section class="description">
+            <p>
+               {{step.description}}
+            </p>
+        </section>
+
+        <section class="inputs-description">
+            <p> 
+                inputs : </br>
+                <ul>
+                     {% for i in step.inputs %}
+                     * <il>{{i}}</il></br>
+                     {% endfor %}
+                </ul>
+            </p>
+        </section>
+
+        <section class="flag-form">
+            <section class="tech-description">
+            <p> 
+                You can spawn your own, isolated, instance of SAFE system for your tests.</br>
+                Cookie are used to store instance id for persistence.</br>
+                Exposed ports will be randomized and comunicated after the instance is ready.</br>
+                To avoid player interference, your instance will only be accessible to your current IP ({{player_ip}}).
+            </p>
+            </section>
+
+            <section class="controls">
+                <div class="actions">
+                    <button id="btn-create" data-action="create">Lancer l'instance</button>
+                    <button id="btn-restart" data-action="restart">Redemarrer</button>
+                    <button id="btn-delete" data-action="delete" class="danger">Stopper l'instance</button>
+                </div>
+            </section>
+
+            <section id="result" class="result hidden"></section>
+        </section>
+        
+
+        <section class="flag-form">
+            <div class="input-group">
+                <label for="flag-input">Flag</label>
+                <input type="text" id="flag-input" placeholder="SSTIC{...}" autocomplete="off">
+            </div>
+            <button id="btn-flag">Soumettre le flag</button>
+            <div id="flag-result" class="flag-result hidden"></div>
+        </section>
+    </main>
+
+    <script>const BASE_URL = "/step/{{ hidden_url }}/instance";</script>
+    <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSTIC 2026 - Step3</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main>
+        <h1>Step3 : overflowing faults</h1>
+
+        <section class="description">
+            <p>
+               	Analyst,</br>
+		</br>
+		Thanks for unlocking access. It seems to be far worse than we feared. As you may have read, SAFE does not respond to commands. After a lengthy discussion with one of Aegis admins, we discover the existence of an undocumented, and quite frankly, illegal "debug monitoring stream". In fact, a webcam is pointed at a screen connected to SAFE system (also undocumented...).</br> 
+		</br>
+		However, using this *monitoring stream*, we were able to identify the problem: SAFE's signing key have been updated by an unknown party (we stongly suspect the hactivist group). Can you investigate :</br>
+		<ul>
+			<li>How the attacking group was able to break SAFE's signature scheme. It was supposed to be state-of-the-art <abbr title="Post Quantum Cryptography">PQC</abbr>. If there is a flaw, especially one that can be found by hacktivist nobodies, we have to address it immediatly.</li> 
+			<li>If the flaw used by the attacking group cannot be reused for any reasons, can you look at their signing scheme ?</li>
+		</ul></br>
+		It is referred to as <b>lobster256</b> in their documentation, and we hadn't found a public match. We cannot rule out a custom algorithm, and so far, Aegis have proven to be lacking in their security. If we were able to fake signatures, we would be able to send an update key packet and gain a foothold in the SAFE system.</br>
+		We had found a partial backup in <a href="{{filer_path}}/crypto.michel">one of Aegis employee</a></br>
+		</br>
+		As two is better than one, and without diminishing your cryptanalysis expertise, we have asked an internal expert to review <b>lobster256</b> implementation. They are still working on it, and it may take a few days. We will contact you later using the usual channel.</br> 
+		</br>
+		-ñ</br>
+	    </p>
+        </section>
+	
+	<section class="tldr-description">
+		<p>
+		tl;dr :</br>
+		- sftp (port randomized and supplied when starting an instance of the challenge) : diode_client/{Thisp@ssw0rdShouldN0tB3GUESSED}</br>
+		- monitoring stream : VNC (port randomized and supplied when starting an instance of the challenge).</br>
+		- you need to be able to <b>sign an arbitrary file</b> and <b>update SAFE's key</b>.</br>
+		- SAFE's signing system uses an unknown external <b>ignition file</b>, you should be able to recreate it. It will be needed to run lobster256.</br>
+		</p>
+	</section>
+
+        <section class="inputs-description">
+            <p> 
+                inputs : </br>
+                <ul>
+                     {% for i in step.inputs %}
+                     <li>{{i}}</li>
+                     {% endfor %}
+                </ul>
+            </p>
+        </section>
+
+	<section class="warning-description">
+		<p>
+		-<b>VNC is only there to simulate a read only video stream. Solutions based on an abuse of this interface will be refused.</b></br>
+		-An intermediary flag <a href="/sstic_2026/f70ebd9cf991ae81001cb2ce99/flag_1.tar.enc">flag_1.tar.enc</a> is available to monitor participants progress. This flag can be decrypted (using to be recovered secrets) using <a href="/sstic_2026/f70ebd9cf991ae81001cb2ce99/flag1.py">this script</a>.</br>
+		-To facilitate your tests, a mockup platform can be found <a href='/sstic_2026/f70ebd9cf991ae81001cb2ce99/step3_test.zip'>here</a>.</br>
+		&nbsp;&nbsp;=&gt;<b>you will need to supply your own lobster_ignition.bin file, using recovered parameters</b></br>
+		</p>
+	</section>
+        <section class="flag-form">
+            <section class="tech-description">
+            <p> 
+                You can spawn your own, isolated, instance of SAFE system for your tests.</br>
+                Cookies are used to store instance id for persistence.</br>
+                Exposed ports will be randomized and comunicated after the instance is ready.</br>
+                To avoid player interference, your instance will only be accessible to your current IP ({{player_ip}}).
+            </p>
+            </section>
+
+            <section class="controls">
+                <div class="actions">
+                    <button id="btn-create" data-action="create">Start an instance</button>
+                    <button id="btn-restart" data-action="restart">Restart</button>
+                    <button id="btn-delete" data-action="delete" class="danger">Stop</button>
+                </div>
+            </section>
+
+            <section id="result" class="result hidden"></section>
+        </section>
+        
+
+        <section class="flag-form">
+            <div class="input-group">
+                <label for="flag-input">Flag</label>
+                <input type="text" id="flag-input" placeholder="SSTIC{...}" autocomplete="off">
+            </div>
+            <button id="btn-flag">Submit flag</button>
+            <div id="flag-result" class="flag-result hidden"></div>
+        </section>
+    </main>
+
+    <script>const BASE_URL = "/step/{{ hidden_url }}/instance";</script>
+    <script src="/static/app.js"></script>
+</body>
+</html>

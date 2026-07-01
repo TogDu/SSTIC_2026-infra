@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSTIC 2026 - Step2</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main>
+        <h1>Step2 : a core lock</h1>
+
+        <section class="description">
+            <p>
+               	Hello analyst,</br>
+		</br>
+		As you may suspect, Aegis Tech have been compromised, for quite some time by hacktivists. It cannot be stressed enough how critical it is to regain control of this system. You have been cleared to access any leaked files while we continue to assess the damages. </br>
+		</br>
+		First thing first, you can find a description of SAFE <a href='{{filer_path}}/cproj.ernest/'>here</a>. This system is composed of two parts:
+		<ul>
+			<li>an exposed system (and I assure you, I'm not happy about it), accessible through SFTP. (<b>diode_src</b>)</li>
+			<li>a sealed system (as "lead and concrete box" sealed), commanding a ballistic system.  (<b>diode_dst</b>)</li>
+		</ul></br>
+		These systems are connecting using a network diode. And <b>diode_dst</b> can only be controlled using archives pushed from <b>diode_src</b>.</br>
+		</br>
+		Aegis Tech have "lost control" of SAFE a few weeks ago, and hadn't reached about it. If you find any information about the timeline of events and what the heck happen, please add it to your report. However that's not your main task : the exposed system has been tempered with, and archive sent to assess status and take back control on SAFE are not transmitted. Can you investigate and fix the issue ? </br>
+		</br>
+		It seems that one of their admin investigated, in the early stages of the incident, some suspicious <a href='{{filer_path}}/admin.jean/260302_SAFE_INTERNAL_Crash_diode_src/'>crashes</a>, it may be a good starting point.</br>
+		</br>
+		-ñ </br>
+	    </p>
+	</section>
+
+	<section class="tldr-description">
+	<p>
+		tl;dr : </br>
+		- sftp (port randomized and supplied when starting an instance of the challenge) : login on a system documentation </br>
+		- you <b>DO NOT NEED</b> to setup an interactive shell on target system, as <b>diode_src</b> has no outward access.</br>
+        </p>
+        </section>
+
+        <section class="inputs-description">
+            <p> 
+                inputs : </br>
+                <ul>
+                     {% for i in step.inputs %}
+                     <li>{{i}}</li>
+                     {% endfor %}
+                </ul>
+            </p>
+        </section>
+
+        <section class="flag-form">
+            <section class="tech-description">
+            <p> 
+                You can spawn your own, isolated, instance of SAFE system for your tests.</br>
+                Cookies are used to store instance id for persistence.</br>
+                Exposed ports will be randomized and comunicated after the instance is ready.</br>
+                To avoid player interference, your instance will only be accessible to your current IP ({{player_ip}}).
+            </p>
+            </section>
+
+            <section class="controls">
+                <div class="actions">
+		    <button id="btn-create" data-action="create">Start an instance</button>
+                    <button id="btn-restart" data-action="restart">Restart</button>
+                    <button id="btn-delete" data-action="delete" class="danger">Stop</button>
+                </div>
+            </section>
+
+            <section id="result" class="result hidden"></section>
+        </section>
+        
+
+        <section class="flag-form">
+            <div class="input-group">
+                <label for="flag-input">Flag</label>
+                <input type="text" id="flag-input" placeholder="SSTIC{...}" autocomplete="off">
+            </div>
+            <button id="btn-flag">Submit flag</button>
+            <div id="flag-result" class="flag-result hidden"></div>
+        </section>
+    </main>
+
+    <script>const BASE_URL = "/step/{{ hidden_url }}/instance";</script>
+    <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSTIC 2026 - Step5</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main>
+        <h1>Step5 : dumping through my screen</h1>
+
+        <section class="description">
+            <p>
+            	Analyst,</br>
+		</br>
+		Thanks for the database ! At this point, you have all the informations needed to disable SAFE. We will continue to monitor the situation while you disable the system. </br>
+		</br>
+		It may be a little early, but thanks for helping us handle this crisis.</br>
+		</br>
+		-ñ 
+	    </p>
+        </section>
+	
+	<section class="tldr-description">
+		<p>
+		tl;dr:</br>
+		- sftp (port randomized and supplied when starting an instance of the challenge) : diode_client/{Thisp@ssw0rdShouldN0tB3GUESSED}</br>
+		- monitoring stream : VNC (port randomized and supplied when starting an instance of the challenge).</br>
+		- you need to <b>disarm SAFE</b>.</br>
+		</p>
+	</section>
+
+        <section class="inputs-description">
+            <p> 
+                inputs : </br>
+                <ul>
+                     {% for i in step.inputs %}
+                     <li>{{i}}</li>
+                     {% endfor %}
+                </ul>
+            </p>
+        </section>
+
+	<section class="warning-description">
+		<p>
+		VNC is only there to simulate a read only video stream. Solutions based on an abuse of this interface will be refused.
+		</p>
+	</section>
+
+        <section class="flag-form">
+            <section class="tech-description">
+            <p> 
+                You can spawn your own, isolated, instance of SAFE system for your tests.</br>
+                Cookies are used to store instance id for persistence.</br>
+                Exposed ports will be randomized and comunicated after the instance is ready.</br>
+                To avoid player interference, your instance will only be accessible to your current IP ({{player_ip}}).
+            </p>
+            </section>
+
+            <section class="controls">
+                <div class="actions">
+                    <button id="btn-create" data-action="create">Start an instance</button>
+		    <button id="btn-restart" data-action="restart">Restart</button>
+                    <button id="btn-delete" data-action="delete" class="danger">Stop</button>
+                </div>
+            </section>
+
+            <section id="result" class="result hidden"></section>
+        </section>
+        
+
+    </main>
+
+    <script>const BASE_URL = "/step/{{ hidden_url }}/instance";</script>
+    <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+Jean, j'ai fini par récupérer un coredump de la partie verte de SAFE, comme vu au standup restreint d'hier,
+fait preuve de la plus grande discrétion sur le sujet. Le commanditaire ne DOIT PAS être mis au courant.

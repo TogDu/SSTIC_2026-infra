@@ -1,0 +1,63 @@
+[global_config]
+  ask_before_closing = never
+  use_system_font = False
+[keybindings]
+[profiles]
+  [[default]]
+    scrollback_infinite = True
+  [[tesseract-friendly]]
+    scrollback_infinite = True
+    font = Noto Mono 14
+    background_color= "#FFFFFF"
+    foreground_color= "#000000"
+  [[echo1]]
+[layouts]
+  [[default]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 0:0
+      maximised = True
+      fullscreen = False
+      size = 1280, 1024
+      title = Master Secure Terminal
+      last_active_term = 98b50903-ebb2-4071-b8a6-76d12902885c
+      last_active_window = False
+    [[[child1]]]
+      type = VPaned
+      parent = child0
+      order = 0
+      ratio = 0.3
+    [[[child2]]]
+      type = HPaned
+      parent = child1
+      order = 0
+    [[[terminal3]]]
+      type = Terminal
+      parent = child1
+      order = 1
+      profile = tesseract-friendly
+      title = diode_dest.log
+      uuid = 98b50903-ebb2-4071-b8a6-76d12902885c
+      directory = /home/diode/
+      command = tail -q -F /log/diode_dest.log
+    [[[terminal4]]]
+      type = Terminal
+      parent = child2
+      order = 0
+      profile = default
+      title = weapon server
+      uuid = a6fe831b-850e-479a-b39e-3aef727c64bb
+      directory = /home/diode/
+      command = tail -q -F /log/weapon_server.log
+    [[[terminal5]]]
+      type = Terminal
+      parent = child2
+      order = 1
+      profile = tesseract-friendly
+      title = weapon auth supervisor
+      uuid = 6880de37-249d-40cd-bd1c-af574c2526c6
+      directory = /home/diode/
+      command = tail -q -F /log/weapon_supervisor.log
+[plugins]

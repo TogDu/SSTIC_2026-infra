@@ -1,0 +1,11 @@
+Salut ! 
+
+En préparation de l'audit de l'équipe de KaKaWuet, est-ce que tu pourrais ajouter deux utilisateurs à la base de pré-prod ? 
+- SSTIC_USER/DefaultPassword : aucun droit
+- audit_KaKaHuet : tous les droits, génère un mot de passe fort et note-le sur papier. 
+
+Comme ça on peut faire une dernière mise à jour avant la fermeture du SAFE le 13 janvier (tu es invité au pot de célébration d'ailleurs).
+
+Merci !
+
+Jean

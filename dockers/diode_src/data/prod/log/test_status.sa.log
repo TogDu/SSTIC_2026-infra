@@ -1,0 +1,20 @@
+[2026-03-24 12:17:34] [INFO] Processings data/in/test_status.sa
+[2026-03-24 12:17:34] [INFO] Archive mapped at 0x7f4cf8688000, size is 307
+[2026-03-24 12:17:34] [INFO] CRC is valid
+[2026-03-24 12:17:34] [INFO] Header is valid
+[2026-03-24 12:17:34] [INFO] Add tag: 'DEBUG'
+[2026-03-24 12:17:34] [INFO] Add tag: 'TEST_STATUS'
+[2026-03-24 12:17:34] [INFO] Add tag: 'ARCHIVE'
+[2026-03-24 12:17:34] [INFO] Add tag: 'SSTIC2026'
+[2026-03-24 12:17:34] [INFO] Tags are valid
+[2026-03-24 12:17:34] [DEBUG] Debug enabled
+[2026-03-24 12:17:34] [DEBUG] pkg_ptr 0x7f4cf8688054 pkg_size 85
+[2026-03-24 12:17:34] [DEBUG] sig_ptr 0x7f4cf86880a9 sig_size 88
+[2026-03-24 12:17:34] [DEBUG] secret_ptr 0x7f4cf8688101 secret_size 50
+[2026-03-24 12:17:34] [DEBUG] pkg_decompressed_ptr 0x557d247bacb0 pkg_decompressed_size 96
+[2026-03-24 12:17:34] [DEBUG] blob 0 detected: type "WEAPON_OPEN_SESSION", len 0
+[2026-03-24 12:17:34] [DEBUG] blob 1 detected: type "WEAPONS_MSG", len 38
+[2026-03-24 12:17:34] [DEBUG] blob 2 detected: type "WEAPONS_MSG", len 5
+[2026-03-24 12:17:34] [DEBUG] blob 3 detected: type "WEAPON_CLOSE_SESSION", len 0
+[2026-03-24 12:17:34] [INFO] Pkg is valid
+[2026-03-24 12:17:34] [INFO] Secret is valid

@@ -1,0 +1,39 @@
+Désolé pour tout à l'heure.
+
+Je sais pas comment annoncer ça à Ernest (s'il m'a pas entendu), je me vois mal lui demander de sortir un marteau piqueur 
+pour défoncer le cube dont il est si fier. Je sais même pas si c'est possible sans déclencher l'anti-tempering de SAFE en fait.
+
+Je te propose qu'on laisse en l'état, personne s'en rendra compte.
+
+Jean
+
+---------------------------------------------------------------------------------------------------------------------------------
+Bonjour,
+
+Hmmmm.... Tu te souviens du point du 04/01, où on a fait le tour de ce qu'il restait à faire sur SAFE avant sa fermeture ? 
+La dernière version du front-end de la diode : 
+
+#TODO 
+def process_update_sig_bin(data):
+    logging.warning("Not implemented")
+
+#TODO 
+def process_update_user_db(data):
+    logging.warning("Not implemented")
+
+Le ticket n'a pas été attribué visiblement. On ne peut pas mettre à jour SAFE, en tout cas ni le binaire de l'équipe de Michel, 
+ni la base des utilisateurs. C'est faisable depuis ton flux de monitoring?
+
+Sinon... Courte paille pour annoncer la nouvelle à Ernest ? 
+
+Eric
+
+---------------------------------------------------------------------------------------------------------------------------------
+Salut ! 
+
+Est-ce que tu pourrais préparer une archive de mise à jour de la base de données ? Il faudrait supprimer les comptes SSTIC_USER, 
+audit_KaKaHuet et celui de Stephen LEE, qui a quitté Aegis en fin de semaine dernière.
+
+Merci !
+
+Jean

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowGuard Pro - Documentation Technico-Commerciale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #3498db;
+            padding-bottom: 5px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: monospace;
+        }
+        .contact-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ShadowGuard Pro</h1>
+    <h2>La solution logicielle de protection contre les attaques ROP pour les applicatifs Linux userland</h2>
+
+    <h2>1. Introduction</h2>
+    <p>ShadowGuard Pro est une solution innovante de sécurité informatique qui implémente une <strong>Shadow Stack</strong> logicielle pour protéger les applicatifs Linux userland contre les attaques de type <strong>Return-Oriented Programming (ROP)</strong>. En surveillant et en validant les adresses de retour des fonctions, ShadowGuard Pro empêche les attaquants d'exploiter les vulnérabilités mémoire pour exécuter du code malveillant.</p>
+
+    <h2>2. Fonctionnement Technique</h2>
+
+    <h3>2.1. Principe de la Shadow Stack</h3>
+    <p>La Shadow Stack est une pile parallèle qui stocke les adresses de retour des fonctions de manière sécurisée. Contrairement à la pile standard, qui peut être corrompue par des attaques, la Shadow Stack est protégée et ne peut être modifiée que par des instructions spécifiques.</p>
+
+    <h3>2.2. Mécanisme de Protection</h3>
+    <ul>
+        <li><strong>Validation des Adresses de Retour</strong> : À chaque retour de fonction, ShadowGuard Pro compare l'adresse de retour de la pile standard avec celle de la Shadow Stack. Si elles ne correspondent pas, une alerte est générée et l'exécution est interrompue.</li>
+        <li><strong>Détection des Attentats ROP</strong> : En empêchant la modification des adresses de retour, ShadowGuard Pro bloque les attaques ROP qui tentent de rediriger l'exécution du programme vers du code malveillant.</li>
+        <li><strong>Intégration via ptrace</strong> : ShadowGuard Pro utilise l'interface ptrace pour lancer et surveiller l'application à sécuriser, permettant une protection transparente sans modification du code source.</li>
+    </ul>
+
+    <h2>3. Avantages</h2>
+    <ul>
+        <li><strong>Protection Complète contre les ROP</strong> : Empêche les attaques par chaîne de gadgets ROP.</li>
+        <li><strong>Compatibilité Linux</strong> : Fonctionne avec tous les applicatifs Linux userland.</li>
+        <li><strong>Performance Optimisée</strong> : Impact minimal sur les performances grâce à une implémentation légère et efficace.</li>
+        <li><strong>Facilité de Déploiement</strong> : Lancement simple via un exécutable dédié.</li>
+        <li><strong>Surveillance en Temps Réel</strong> : Génération d'alertes et de rapports pour une détection proactive des tentatives d'attaque.</li>
+    </ul>
+
+    <h2>4. Cas d'Utilisation</h2>
+    <ul>
+        <li><strong>Sécurisation des Applications Critiques</strong> : Protège les applications sensibles contre les exploits mémoire.</li>
+        <li><strong>Renforcement de la Sécurité des Serveurs</strong> : Idéal pour les environnements serveur où la sécurité est primordiale.</li>
+        <li><strong>Protection des Données Sensibles</strong> : Empêche l'exécution de code malveillant qui pourrait compromettre les données.</li>
+    </ul>
+
+    <h2>5. Déploiement et Intégration</h2>
+
+    <h3>5.1. Prérequis</h3>
+    <ul>
+        <li>Système d'exploitation : Linux (versions supportées : Ubuntu, CentOS, Debian, etc.)</li>
+        <li>Architecture : x86_64</li>
+        <li>Droits administrateur : Nécessaires pour l'utilisation de ptrace</li>
+    </ul>
+
+    <h3>5.2. Installation</h3>
+    <ol>
+        <li><strong>Téléchargement</strong> : Téléchargez le paquet ShadowGuard Pro depuis notre site web.</li>
+        <li><strong>Installation</strong> : Suivez les instructions d'installation fournies dans le guide d'installation.</li>
+        <li><strong>Configuration</strong> : Configurez les paramètres de protection selon vos besoins.</li>
+    </ol>
+
+    <h3>5.3. Utilisation</h3>
+    <p>ShadowGuard Pro est un exécutable qui lance et surveille l'application à sécuriser via ptrace. La syntaxe de base est la suivante :</p>
+
+    <pre><code>shadowguard-pro [options] <commande> [arguments]</code></pre>
+
+    <p>Exemple :</p>
+    <pre><code>shadowguard-pro --log-level=debug /usr/bin/mon_application --option1 --option2</code></pre>
+
+    <h3>5.4. Options Courantes</h3>
+    <ul>
+        <li><code>--log-level</code> : Niveau de journalisation (debug, info, warning, error)</li>
+        <li><code>--output</code> : Fichier de sortie pour les logs</li>
+        <li><code>--no-protect</code> : Désactive la protection pour le débogage</li>
+        <li><code>--help</code> : Affiche l'aide</li>
+    </ul>
+
+    <h2>6. Support et Assistance</h2>
+    <ul>
+        <li><strong>Documentation</strong> : Guide d'installation, manuel utilisateur et FAQ disponibles en ligne.</li>
+        <li><strong>Support Technique</strong> : Assistance 24/7 via email et chat en ligne.</li>
+        <li><strong>Mises à Jour</strong> : Mises à jour régulières pour une protection continue contre les nouvelles menaces.</li>
+    </ul>
+
+    <h2>7. Conclusion</h2>
+    <p>ShadowGuard Pro offre une solution robuste et efficace pour protéger les applicatifs Linux userland contre les attaques ROP. En combinant une technologie avancée de Shadow Stack avec une intégration facile via ptrace et une performance optimisée, ShadowGuard Pro est la solution idéale pour renforcer la sécurité de vos applications critiques.</p>
+
+    <h2>8. Contact</h2>
+    <div class="contact-info">
+        <p><strong>Site Web</strong> : <a href="http://www.shadowguardpro.notATld">www.shadowguardpro.notATld</a></p>
+        <p><strong>Email</strong> : <a href="mailto:contact@shadowguardpro.notATld">contact@shadowguardpro.notATld</a></p>
+        <p><strong>Téléphone</strong> : +33 1 23 45 67 89</p>
+    </div>
+</body>
+</html>

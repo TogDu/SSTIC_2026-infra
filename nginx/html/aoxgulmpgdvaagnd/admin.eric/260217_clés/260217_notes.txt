@@ -1,0 +1,1 @@
+les clés sont générées par un équipement acheté par Ernest (un HSM?), il m'a dit que les clés privées ne devaient jamais être écrites dans un fichier
