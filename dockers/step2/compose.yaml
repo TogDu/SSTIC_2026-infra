@@ -1,0 +1,6 @@
+services:
+    diode_src:
+        image: diode_src:latest
+        ports:
+            #SFTP: diode_client/{Thisp@ssw0rdShouldN0tB3GUESSED}
+            - 2222:2222

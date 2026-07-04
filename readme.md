@@ -1,56 +1,20 @@
 # SSTIC 2026 : infrastructure
 
-Partial backup from SSTIC 2026 challenge server. Should contains all players visible data.
-
-## Infra overview : 
-
-```
-            +-----------+
-            |           |  /* --------> filer folder + autoindex
-HTTP/80 <-->|  NGINX:   | 
-            |           |  /step/* ----> 127.0.0.1:8080
-            +----- -----+                   |
-                                            |
-                                            |       
-                                    +---------------+
-                                    |               |   - player UI (steps descritpion & flag mgt)
-                                    |   FLASK       |   - handle player's docker creation & lifetime
-                                    |               |-------+
-                                    |---------------+       |
-                                                            |       
-                                                    +---------------+
-                                                    |               |
-                                                    |   kube&all    |   spawn an isolated S.A.F.E instance 
-                                                    |               |       - diode_dest + firewall
-                                                    +---------------+       - diode_src
-
-                        
-                        +-----------------------------------------------------------------------+
-                        |                           ONE SAFE INSTANCE                           |
-                        |                                                                       |
-                        |           10.0.55.100                       10.0.55.150               |
-                        |       +---------------+               +-------------------+           |   
-                        |       |   diode_src   |               |     diode_dst     |           |
-                        | :2222 |               |               |udp:1789: server   |           |
-rand[30000:32767] <---> | <---> |   SFTP:*:2222 |<------------->|                   |           |
-                        |       +---------------+       +------>|vnc:5900           |           |
-                        |                               |       |  (or nginx+HLS)   |           |
-                        |       +---------------+       |       +-------------------+           |
-                        | :5900 |  alpine/socat |       |                                       |
-rand[30000:32767] <---> | <---> | proxy for vnc |<------+                                       |
-                        |       |               |                                               |
-                        |       +---------------+                                               |
-                        |                                                                       |
-                        |       +---------------+                                               |
-                        |       | firewall(FIX) |  (hotfix for not applicated netpol)           |
-                        |       |   player ip   |     drop all incoming traffic                 |
-                        |       |   filtering   |     except comming from player IP             |
-                        |       +---------------+                                               |
-                        |                                                                       |
-                        +-----------------------------------------------------------------------+
-```
+Partial backup from SSTIC 2026 [challenge server](./infra.md). Should contains all players visible data.
 
 ## Repository content:
+
+### nginx
+
+Nginx config and data, including: 
+* [static challenge inputs](./nginx/html/sstic_2026/f70ebd9cf991ae81001cb2ce99/)
+* [Sivi's exfiltration folder](./nginx//html/aoxgulmpgdvaagnd/)
+* [an hint for step1](./nginx/html/rdglvlniebdgjmdd/)
+* [Sivi's fake startup frontpage](./nginx/html/index.html)
+
+### player_ui
+
+Parts of main player ui, rendered in flask. Steps descriptions can be found in [templates folder](./player_ui/src/templates/).
 
 ### dockers
 
@@ -93,16 +57,6 @@ COPY --chown=diode --chmod=755 vnc.sh /home/diode/vnc.sh
 # COPY --chown=diode --chmod=755 hls.sh /home/diode/hls.sh
 ```
 
-### nginx
 
-Nginx config and data, including : 
-* [static challenge inputs](./nginx/html/sstic_2026/f70ebd9cf991ae81001cb2ce99/)
-* [Sivi's exfiltration folder](./nginx//html/aoxgulmpgdvaagnd/)
-* [an hint for step1](./nginx/html/rdglvlniebdgjmdd/)
-* [Sivi's fake startup frontpage](./nginx/html/index.html)
-
-### player_ui
-
-Parts of main player ui, rendered in flask. Steps descriptions can be found in [templates folder](./player_ui/src/templates/).
 
 
